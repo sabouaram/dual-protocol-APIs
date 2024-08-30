@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package task;
+
+option go_package = "./proto";
+
+// The task service definition.
+service TaskService {
+  rpc CreateTask (CreateTaskRequest) returns (TaskResponse);
+  rpc ListTasks (ListTasksRequest) returns (ListTasksResponse);
+  rpc DeleteTask (DeleteTaskRequest) returns (TaskResponse);
+}
+
+// The request message containing the task details.
+message CreateTaskRequest {
+  string title = 1;
+  string description = 2;
+}
+
+// The request message for listing tasks.
+message ListTasksRequest {}
+
+// The request message for deleting a task.
+message DeleteTaskRequest {
+  int32 id = 1;
+}
+
+// The response message containing a task.
+message TaskResponse {
+  int32 id = 1;
+  string title = 2;
+  string description = 3;
+}
+
+// The response message containing a list of tasks.
+message ListTasksResponse {
+  repeated TaskResponse tasks = 1;
+}
